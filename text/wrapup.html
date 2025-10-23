@@ -1,0 +1,82 @@
+
+
+
+<div id="how-to-design-a-neural-network" class="section level4">
+<h4>How to Design a Neural Network</h4>
+<p>There are many variables to consider when designing a neural network.
+Some variables are fixed by the system, such as the number of
+measurements and the number of outputs. For example, the
+<code>iris</code> data set—a data set used in many machine learning
+studies—provides data on 50 samples each of three species of iris:
+<em>setosa</em>, <em>versicolor</em>, and <em>virginica</em>. For each
+plant, the data includes the sepal’s length and width, and the petal’s
+length and width, all reported in cm. The input layer, therefore, has
+four nodes, one per measurement, and the output layer has three nodes,
+one for each species. The number of hidden layers and the number of
+nodes in each, the learning rate, and the number of epochs is determined
+by trial-and-error. The figure on the right shows a neural network for
+the <code>iris</code> data with inputs on the left and outputs on the
+right. This network includes two hidden layers, the first with four
+nodes and the second with two nodes.</p>
+</div>
+<div id="what-is-the-source-of-the-extra-nodes" class="section level4">
+<h4>What is the Source of the Extra Nodes?</h4>
+<p>There are three additional nodes at the top of the neural network,
+each in blue and each labeled with the number 1. These nodes help to
+account for bias in the data in which all measurements are offset by a
+fixed amount due, for example, to a failure to properly calibrate the
+measurements. Although the weights to these nodes are adjusted during
+training, the value of these nodes are fixed at 1.</p>
+</div>
+<div id="training-and-testing-the-network" class="section level4">
+<h4>Training and Testing the Network</h4>
+<p>The <code>iris</code> data set has data for 150 individual plants.
+The data set was divided into 120 training samples—selected at
+random—with the remaining 30 samples held in reserve for testing the
+trained network. The figure on the right shows the neural network after
+21,239 cycles of feeding-forward and backpropogating samples from the
+training set. The numerical values above each arrow show the weight
+between two nodes.</p>
+<p>After training the network, the 30 test samples were passed through
+the network with each test sample identified by the trained network as
+<em>versicolor</em>, <em>setosa</em>, or <em>virginica</em>. All 30 test
+samples were correctly identified.</p>
+</div>
+<div id="overtraining" class="section level4">
+<h4>Overtraining</h4>
+<p>To be effective, a neural network must be sufficiently flexible that
+it can make correct predictions for a wide variety of samples. When a
+neural network is overtrained it makes poor predictions because it
+cannot see differences between samples. If your training set has only
+one sample that is used over and over, then the trained neural network
+will return essentially the same output for all samples. See, for
+example, your work on the Training and Testing tab where all five test
+samples have predicted outputs of approximately <span class="math inline">\(0.2\)</span> even when their target value was
+<span class="math inline">\(0.0\)</span> or <span class="math inline">\(0.4\)</span>.</p>
+</div>
+<div id="r-package-for-neural-networks" class="section level4">
+<h4>R Package for Neural Networks</h4>
+<p>The analysis of the <code>iris</code> data set was completed using
+the R package <code>neuralnet</code>, which is available from <a href="https://cran.r-project.org/package=neuralnet">CRAN</a>. Additional
+guidance was obtained from a <a href="https://www.datacamp.com/tutorial/neural-network-models-r">datacamp
+tutorial</a>.</p>
+</div>
+<div id="additional-reources" class="section level4">
+<h4>Additional Reources</h4>
+<p>The treatment of neural networks in this learning module is
+intentionally limited, emphasizing a more general than technical
+description of how the feed-forward/backpropogation algorithm works. The
+resources gathered here provide a broader range of treatments.</p>
+<p>An on-line neural network calculator is available from <a href="https://pages.nist.gov/nn-calculator/">NIST</a> on-line neural
+network calculator.</p>
+<p>A useful on-line introduction to neural networks is <a href="https://python-course.eu/machine-learning/neural-networks-introduction.php">Bernd
+Klein, Neural Network Introduction: Chapters 10-17</a>. It provides an
+excellent review of the computational details of the
+feed-forward/backpropogation algorithm.</p>
+<p>Jure Zupan, Johann Gasteiger, <strong>Neural Networks for Chemists;
+An Introduction</strong>, VCH, Weinheim, 1993.</p>
+<p>B.G.M. Vandeginste, D.L.Massart, L.M.C. Buydens, S. DeJong, P.J.
+Lewi, J. Smeyers-Verbeke, <strong>Handbook of Chemometrics and
+Qualimetrics: Part B</strong>, Chapter 44, Elsevier, Amsterdam,
+1998.</p>
+</div>

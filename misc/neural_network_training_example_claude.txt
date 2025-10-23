@@ -1,0 +1,387 @@
+
+NEURAL NETWORK TRAINING EXAMPLE
+Complete Forward and Backward Pass with Weight Updates
+================================================================================
+
+NETWORK ARCHITECTURE
+- Input layer: 2 nodes
+- Hidden layer: 3 nodes  
+- Output layer: 1 node
+- No bias terms
+- Activation function: sigmoid σ(x) = 1/(1 + e^(-x))
+- Error function: Mean Squared Error E = (1/2)(target - output)²
+- Learning rate: η = 0.01
+
+INITIAL WEIGHTS
+
+Input-to-Hidden weights:
+  w₁₁ = 0.251   (from input 1 to hidden node 1)
+  w₁₂ = 0.103   (from input 1 to hidden node 2)
+  w₁₃ = -0.562  (from input 1 to hidden node 3)
+  w₂₁ = 0.565   (from input 2 to hidden node 1)
+  w₂₂ = -0.359  (from input 2 to hidden node 2)
+  w₂₃ = -0.648  (from input 2 to hidden node 3)
+
+Hidden-to-Output weights:
+  v₁ = -0.199   (from hidden node 1 to output)
+  v₂ = 0.525    (from hidden node 2 to output)
+  v₃ = 0.45     (from hidden node 3 to output)
+
+TRAINING SAMPLE
+  Input 1 (x₁): 0.600
+  Input 2 (x₂): 0.400
+  Target output (t): 0.200
+
+================================================================================
+PART 1: FORWARD PASS
+================================================================================
+
+STEP 1: Compute weighted sums for hidden layer nodes
+Purpose: Calculate the net input to each hidden node before activation
+
+Equations:
+  net_h₁ = w₁₁·x₁ + w₂₁·x₂
+  net_h₂ = w₁₂·x₁ + w₂₂·x₂
+  net_h₃ = w₁₃·x₁ + w₂₃·x₂
+
+Calculations:
+  net_h₁ = (0.251)(0.600) + (0.565)(0.400)
+         = 0.1506 + 0.2260
+         = 0.3766
+
+  net_h₂ = (0.103)(0.600) + (-0.359)(0.400)
+         = 0.0618 + (-0.1436)
+         = -0.0818
+
+  net_h₃ = (-0.562)(0.600) + (-0.648)(0.400)
+         = -0.3372 + (-0.2592)
+         = -0.5964
+
+Results:
+  net_h₁ = 0.3766
+  net_h₂ = -0.0818
+  net_h₃ = -0.5964
+
+--------------------------------------------------------------------------------
+
+STEP 2: Apply sigmoid activation to hidden layer nodes
+Purpose: Transform the net inputs using the sigmoid activation function
+
+Equation:
+  h_j = σ(net_h_j) = 1/(1 + e^(-net_h_j))
+
+Calculations:
+  h₁ = 1/(1 + e^(-0.3766))
+     = 1/(1 + e^(-0.3766))
+     = 1/(1 + 0.6862)
+     = 1/1.6862
+     = 0.5931
+
+  h₂ = 1/(1 + e^(-(-0.0818)))
+     = 1/(1 + e^(0.0818))
+     = 1/(1 + 1.0852)
+     = 1/2.0852
+     = 0.4796
+
+  h₃ = 1/(1 + e^(-(-0.5964)))
+     = 1/(1 + e^(0.5964))
+     = 1/(1 + 1.8155)
+     = 1/2.8155
+     = 0.3552
+
+Results:
+  h₁ = 0.5931
+  h₂ = 0.4796
+  h₃ = 0.3552
+
+--------------------------------------------------------------------------------
+
+STEP 3: Compute weighted sum for output node
+Purpose: Calculate the net input to the output node before activation
+
+Equation:
+  net_o = v₁·h₁ + v₂·h₂ + v₃·h₃
+
+Calculation:
+  net_o = (-0.199)(0.5931) + (0.525)(0.4796) + (0.45)(0.3552)
+        = -0.1180 + 0.2518 + 0.1598
+        = 0.2936
+
+Result:
+  net_o = 0.2936
+
+--------------------------------------------------------------------------------
+
+STEP 4: Apply sigmoid activation to output node
+Purpose: Transform the output net input to get the final network output
+
+Equation:
+  y = σ(net_o) = 1/(1 + e^(-net_o))
+
+Calculation:
+  y = 1/(1 + e^(-0.2936))
+    = 1/(1 + e^(-0.2936))
+    = 1/(1 + 0.7455)
+    = 1/1.7455
+    = 0.5729
+
+Result:
+  y = 0.5729 (network output)
+
+================================================================================
+PART 2: ERROR CALCULATION
+================================================================================
+
+STEP 5: Compute the error
+Purpose: Calculate how far the network output is from the target
+
+Equation:
+  E = (1/2)(t - y)²
+
+Calculation:
+  E = (1/2)(0.200 - 0.5729)²
+    = (1/2)(-0.3729)²
+    = (1/2)(0.1391)
+    = 0.0695
+
+Result:
+  E = 0.0695
+
+================================================================================
+PART 3: BACKWARD PASS (BACKPROPAGATION)
+================================================================================
+
+STEP 6: Compute output layer error signal (delta)
+Purpose: Calculate the gradient of the error with respect to the output 
+         node's net input
+
+Equation:
+  δ_o = -(t - y) · σ'(net_o)
+  
+  where σ'(net_o) = σ(net_o) · (1 - σ(net_o)) = y · (1 - y)
+
+Calculation:
+  σ'(net_o) = y · (1 - y)
+            = 0.5729 · (1 - 0.5729)
+            = 0.5729 · 0.4271
+            = 0.2447
+
+  δ_o = -(0.200 - 0.5729) · 0.2447
+      = -(-0.3729) · 0.2447
+      = 0.3729 · 0.2447
+      = 0.0912
+
+Result:
+  δ_o = 0.0912
+
+--------------------------------------------------------------------------------
+
+STEP 7: Compute gradients for hidden-to-output weights
+Purpose: Calculate how much each hidden-to-output weight contributed to the 
+         error
+
+Equation:
+  ∂E/∂v_j = δ_o · h_j
+
+Calculations:
+  ∂E/∂v₁ = δ_o · h₁ = 0.0912 · 0.5931 = 0.0541
+
+  ∂E/∂v₂ = δ_o · h₂ = 0.0912 · 0.4796 = 0.0437
+
+  ∂E/∂v₃ = δ_o · h₃ = 0.0912 · 0.3552 = 0.0324
+
+Results:
+  ∂E/∂v₁ = 0.0541
+  ∂E/∂v₂ = 0.0437
+  ∂E/∂v₃ = 0.0324
+
+--------------------------------------------------------------------------------
+
+STEP 8: Compute hidden layer error signals (deltas)
+Purpose: Backpropagate the error to the hidden layer nodes
+
+Equation:
+  δ_h_j = σ'(net_h_j) · Σ(δ_o · v_j)
+  
+  where σ'(net_h_j) = h_j · (1 - h_j)
+
+Calculations:
+  For hidden node 1:
+    σ'(net_h₁) = h₁ · (1 - h₁)
+               = 0.5931 · (1 - 0.5931)
+               = 0.5931 · 0.4069
+               = 0.2413
+    
+    δ_h₁ = 0.2413 · (δ_o · v₁)
+         = 0.2413 · (0.0912 · (-0.199))
+         = 0.2413 · (-0.0181)
+         = -0.0044
+
+  For hidden node 2:
+    σ'(net_h₂) = h₂ · (1 - h₂)
+               = 0.4796 · (1 - 0.4796)
+               = 0.4796 · 0.5204
+               = 0.2496
+    
+    δ_h₂ = 0.2496 · (δ_o · v₂)
+         = 0.2496 · (0.0912 · 0.525)
+         = 0.2496 · 0.0479
+         = 0.0120
+
+  For hidden node 3:
+    σ'(net_h₃) = h₃ · (1 - h₃)
+               = 0.3552 · (1 - 0.3552)
+               = 0.3552 · 0.6448
+               = 0.2290
+    
+    δ_h₃ = 0.2290 · (δ_o · v₃)
+         = 0.2290 · (0.0912 · 0.45)
+         = 0.2290 · 0.0410
+         = 0.0094
+
+Results:
+  δ_h₁ = -0.0044
+  δ_h₂ = 0.0120
+  δ_h₃ = 0.0094
+
+--------------------------------------------------------------------------------
+
+STEP 9: Compute gradients for input-to-hidden weights
+Purpose: Calculate how much each input-to-hidden weight contributed to the 
+         error
+
+Equation:
+  ∂E/∂w_ij = δ_h_j · x_i
+
+Calculations:
+  For weights from input 1:
+    ∂E/∂w₁₁ = δ_h₁ · x₁ = -0.0044 · 0.600 = -0.0026
+
+    ∂E/∂w₁₂ = δ_h₂ · x₁ = 0.0120 · 0.600 = 0.0072
+
+    ∂E/∂w₁₃ = δ_h₃ · x₁ = 0.0094 · 0.600 = 0.0056
+
+  For weights from input 2:
+    ∂E/∂w₂₁ = δ_h₁ · x₂ = -0.0044 · 0.400 = -0.0018
+
+    ∂E/∂w₂₂ = δ_h₂ · x₂ = 0.0120 · 0.400 = 0.0048
+
+    ∂E/∂w₂₃ = δ_h₃ · x₂ = 0.0094 · 0.400 = 0.0038
+
+Results:
+  ∂E/∂w₁₁ = -0.0026    ∂E/∂w₂₁ = -0.0018
+  ∂E/∂w₁₂ = 0.0072     ∂E/∂w₂₂ = 0.0048
+  ∂E/∂w₁₃ = 0.0056     ∂E/∂w₂₃ = 0.0038
+
+================================================================================
+PART 4: WEIGHT UPDATES
+================================================================================
+
+STEP 10: Update hidden-to-output weights
+Purpose: Adjust the hidden-to-output weights to reduce the error
+
+Equation:
+  v_j(new) = v_j(old) - η · ∂E/∂v_j
+
+Calculations:
+  v₁(new) = -0.199 - (0.01)(0.0541)
+          = -0.199 - 0.0005
+          = -0.1995
+
+  v₂(new) = 0.525 - (0.01)(0.0437)
+          = 0.525 - 0.0004
+          = 0.5246
+
+  v₃(new) = 0.45 - (0.01)(0.0324)
+          = 0.45 - 0.0003
+          = 0.4497
+
+Results:
+  v₁(new) = -0.1995
+  v₂(new) = 0.5246
+  v₃(new) = 0.4497
+
+--------------------------------------------------------------------------------
+
+STEP 11: Update input-to-hidden weights
+Purpose: Adjust the input-to-hidden weights to reduce the error
+
+Equation:
+  w_ij(new) = w_ij(old) - η · ∂E/∂w_ij
+
+Calculations:
+  w₁₁(new) = 0.251 - (0.01)(-0.0026)
+           = 0.251 + 0.0000
+           = 0.2510
+
+  w₁₂(new) = 0.103 - (0.01)(0.0072)
+           = 0.103 - 0.0001
+           = 0.1029
+
+  w₁₃(new) = -0.562 - (0.01)(0.0056)
+           = -0.562 - 0.0001
+           = -0.5621
+
+  w₂₁(new) = 0.565 - (0.01)(-0.0018)
+           = 0.565 + 0.0000
+           = 0.5650
+
+  w₂₂(new) = -0.359 - (0.01)(0.0048)
+           = -0.359 - 0.0000
+           = -0.3590
+
+  w₂₃(new) = -0.648 - (0.01)(0.0038)
+           = -0.648 - 0.0000
+           = -0.6480
+
+Results:
+  w₁₁(new) = 0.2510    w₂₁(new) = 0.5650
+  w₁₂(new) = 0.1029    w₂₂(new) = -0.3590
+  w₁₃(new) = -0.5621   w₂₃(new) = -0.6480
+
+================================================================================
+SUMMARY OF WEIGHT UPDATES
+================================================================================
+
+Input-to-Hidden Weights:
+  Weight    Old Value    Gradient      New Value    Change
+  ------    ---------    --------      ---------    ------
+  w₁₁       0.251        -0.0026       0.2510       +0.0000
+  w₁₂       0.103        +0.0072       0.1029       -0.0001
+  w₁₃       -0.562       +0.0056       -0.5621      -0.0001
+  w₂₁       0.565        -0.0018       0.5650       +0.0000
+  w₂₂       -0.359       +0.0048       -0.3590      -0.0000
+  w₂₃       -0.648       +0.0038       -0.6480      -0.0000
+
+Hidden-to-Output Weights:
+  Weight    Old Value    Gradient      New Value    Change
+  ------    ---------    --------      ---------    ------
+  v₁        -0.199       +0.0541       -0.1995      -0.0005
+  v₂        0.525        +0.0437       0.5246       -0.0004
+  v₃        0.45         +0.0324       0.4497       -0.0003
+
+================================================================================
+KEY OBSERVATIONS
+================================================================================
+
+1. The network initially output 0.5729, but the target was 0.200, resulting
+   in an error of 0.0695.
+
+2. The output was too high, so the error signal δ_o was positive (0.0912),
+   indicating we need to reduce the output.
+
+3. Hidden-to-output weights were adjusted:
+   - v₁ (negative weight) became more negative, helping reduce output
+   - v₂ and v₃ (positive weights) decreased, helping reduce output
+
+4. Input-to-hidden weight changes were very small due to:
+   - The small learning rate (0.01)
+   - Error being backpropagated and diluted through the network
+   - This is typical for early training iterations
+
+5. After this single update, if we ran the forward pass again with the new
+   weights, the output would be slightly closer to the target of 0.200.
+
+================================================================================
+END OF WORKED EXAMPLE
+================================================================================

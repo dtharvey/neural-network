@@ -1,0 +1,37 @@
+---
+title: "wrapup"
+output: html_fragment
+---
+#### How to Design a Neural Network
+
+There are many variables to consider when designing a neural network. Some variables are fixed by the system, such as the number of measurements and the number of outputs. For example, the `iris` data set---a data set used in many machine learning studies---provides data on 50 samples each of three species of iris: *setosa*, *versicolor*, and *virginica*. For each plant, the data includes the sepal's length and width, and the petal's length and width, all reported in cm. The input layer, therefore, has four nodes, one per measurement, and the output layer has three nodes, one for each species. The number of hidden layers and the number of nodes in each, the learning rate, and the number of epochs is determined by trial-and-error. The figure on the right shows a neural network for the `iris` data with inputs on the left and outputs on the right. This network includes two hidden layers, the first with four nodes and the second with two nodes.
+
+#### What is the Source of the Extra Nodes?
+
+There are three additional nodes at the top of the neural network, each in blue and each labeled with the number 1. These nodes help to account for bias in the data in which all measurements are offset by a fixed amount due, for example, to a failure to properly calibrate the measurements. Although the weights to these nodes are adjusted during training, the value of these nodes are fixed at 1.
+
+#### Training and Testing the Network
+
+The `iris` data set has data for 150 individual plants. The data set was divided into 120 training samples---selected at random---with the remaining 30 samples held in reserve for testing the trained network. The figure on the right shows the neural network after 21,239 cycles of feeding-forward and backpropogating samples from the training set. The numerical values above each arrow show the weight between two nodes. 
+
+After training the network, the 30 test samples were passed through the network with each test sample identified by the trained network as *versicolor*, *setosa*, or *virginica*. All 30 test samples were correctly identified.
+
+#### Overtraining
+
+To be effective, a neural network must be sufficiently flexible that it can make correct predictions for a wide variety of samples. When a neural network is overtrained it makes poor predictions because it cannot see differences between samples. If your training set has only one sample that is used over and over, then the trained neural network will return essentially the same output for all samples. See, for example, your work on the Training and Testing tab where all five test samples have predicted outputs of approximately $0.2$ even when their target value was $0.0$ or $0.4$.
+
+#### R Package for Neural Networks
+
+The analysis of the `iris` data set was completed using the R package `neuralnet`, which is available from [CRAN](https://cran.r-project.org/package=neuralnet). Additional guidance was obtained from a [datacamp tutorial](https://www.datacamp.com/tutorial/neural-network-models-r).
+
+#### Additional Reources
+
+The treatment of neural networks in this learning module is intentionally limited, emphasizing a more general than technical description of how the feed-forward/backpropogation algorithm works. The resources gathered here provide a broader range of treatments. 
+
+An on-line neural network calculator is available from [NIST](https://pages.nist.gov/nn-calculator/) on-line neural network calculator.
+
+A useful on-line introduction to neural networks is [Bernd Klein, Neural Network Introduction: Chapters 10-17](https://python-course.eu/machine-learning/neural-networks-introduction.php). It provides an excellent review of the computational details of the feed-forward/backpropogation algorithm.
+
+Jure Zupan, Johann Gasteiger, **Neural Networks for Chemists; An Introduction**, VCH, Weinheim, 1993. 
+
+B.G.M. Vandeginste, D.L.Massart, L.M.C. Buydens, S. DeJong, P.J. Lewi, J. Smeyers-Verbeke, **Handbook of Chemometrics and Qualimetrics: Part B**, Chapter 44, Elsevier, Amsterdam, 1998.

@@ -1,0 +1,37 @@
+
+
+
+<p>A training sample provides a set of inputs and the corresponding
+expected, or target, result. The difference between the target, <span class="math inline">\(t\)</span>, and the output of the feed forward
+process, <span class="math inline">\(O_1\)</span>, is an error, <span class="math inline">\(E\)</span>. The goal of backpropogation is to use
+that error to adjust all of the neural network’s weights in a way that
+minimizes the difference between <span class="math inline">\(t\)</span>
+and <span class="math inline">\(O_1\)</span>.</p>
+<p><strong>Exercise 1</strong>. There are several ways to report error,
+but the one used here is <span class="math inline">\(E = \frac{1}{2}(t -
+O_1)^2\)</span>. Given inputs of <span class="math inline">\(I_1 =
+0.600\)</span> and <span class="math inline">\(I_2 = 0.400\)</span>, a
+target of <span class="math inline">\(t = 0.200\)</span>, and the
+results accessible using the after feed-forward radio button, what is
+the value of <span class="math inline">\(E\)</span>.</p>
+<p><strong>Exercise 2</strong>. In backpropogation, the error at the
+output layer is spread across the weights between the layers of nodes.
+Beginning with the output, the algorithm adjusts the weights between the
+output layer and the hidden layer, and then adjusts the weights between
+the hidden layer and the input layer. The result is the network on the
+right accessible using the after backpropogation radio button. Which set
+of weights—those between the output layer and the hidden layer or those
+between the hidden layer and the input layer—show the greatest change in
+value? Explain why this makes sense. In which direction—more
+negative/less positive or more positive/less negative—are the changes in
+the value of these weights? Explain why this makes sense.</p>
+<p><strong>Exercise 3</strong>. Use the radio button to examine the
+after backpropogation neural network. The inputs,<span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, the values of the hidden layer,
+<span class="math inline">\(H_1\)</span>, <span class="math inline">\(H_2\)</span>, and <span class="math inline">\(H_3\)</span>, and the output, <span class="math inline">\(O_1\)</span> are missing because each is reset
+before taking a new training sample through the feed-forward process.
+Suppose you run the same training sample through the feed-forward
+network a second time, using <span class="math inline">\(I_1 =
+0.600\)</span>, <span class="math inline">\(I_2 = 0.400\)</span>, and
+<span class="math inline">\(t = 0.200\)</span>. Using the weights from
+the after backpropogation network, determine the value for <span class="math inline">\(O_1\)</span> and the resulting error. Do your
+results make sense?</p>
