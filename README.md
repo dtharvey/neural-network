@@ -1,8 +1,5 @@
 This learning module introduces neural networks as a means for finding an underlying structure in a set of data. The module focuses on describing the structure of a feed-forward neural network and its training using backpropagation.
 
-To run locally, install the packages shiny and shinythemes (if not already installed), and enter the following two lines into the console:
+required packages: `shiny`, `shinythemes`
 
-library(shiny)
-library(shinythemes
-
-shiny::runGitHub("neural-network","dtharvey")
+to run locally in a browser window enter `shiny::runGitHub("neural-network","dtharvey", launch.browser = TRUE)` in console
