@@ -2,4 +2,4 @@ This learning module introduces neural networks as a means for finding an underl
 
 required packages: `shiny`, `shinythemes`
 
-to run locally in a browser window enter `shiny::runGitHub("neural-network","dtharvey", launch.browser = TRUE)` in console
+to run locally in a browser window enter `shiny::runGitHub("neural-network","dtharvey", launch.browser = TRUE)` in the console
