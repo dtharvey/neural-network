@@ -25,7 +25,7 @@ ui = navbarPage("AC 3.0: Neural Networks",
             ))),
 
 # first activity
-  tabPanel("Feed-Forward",
+  tabPanel("Feeding-Forward",
     fluidRow(
       column(width = 6,
         wellPanel(
@@ -36,18 +36,20 @@ ui = navbarPage("AC 3.0: Neural Networks",
           ))),
       column(width = 6,
              align = "center",
+             img(src = "xor.png", height = "125px"),
+             br(), br(),
    radioButtons("image_choice1", label = "select neural network",
-                choices = c("template" = "template.png",
-                            "initial set-up" = "initial.png",
-                            "after feed-forward" = "final.png"),
+                choices = c("template" = "xor-network.png",
+                            "initial set-up" = "xor-initial-network.png",
+                            "after feed-forward" = "xor-after-feedforward.png"),
                 inline = TRUE),
-   br(), br(),
-   imageOutput("activity1a", height = "500px")
+   br(),
+   imageOutput("activity1a", height = "300px")
 
       ))),
       
  # second activity
-    tabPanel("Backpropogation",
+    tabPanel("Backpropagating",
       fluidRow(
         column(width = 6,
           wellPanel(
@@ -59,8 +61,8 @@ ui = navbarPage("AC 3.0: Neural Networks",
         column(width = 6,
           align = "center",
           radioButtons("image_choice2", label = "select neural network",
-                       choices = c("after feed-forward" = "final.png",
-                                   "after backpropogation" = "backprop.png"),
+          choices = c("after feed-forward" = "xor-after-feedforward.png",
+                      "after backpropagation" = "xor-after-backpropogation.png"),
                        inline = TRUE),
           br(), br(),
           imageOutput("activity2a", height = "500px")
@@ -68,7 +70,7 @@ ui = navbarPage("AC 3.0: Neural Networks",
         ))),
 
   # third activity
-    tabPanel("Training and Testing",
+    tabPanel("Training & Testing",
       fluidPage(
         column(width = 6,
           wellPanel(
@@ -79,20 +81,27 @@ ui = navbarPage("AC 3.0: Neural Networks",
             ))),
         column(width = 6,
           align = "center",
-          splitLayout(radioButtons("eta1", label = "eta (learning rate)",
-                       choices = c(0.01, 0.05, 0.1, 0.5, 1.0),
-                       inline = TRUE),
-          radioButtons("epochs1", label =  "epochs",
-                       choices = c(10, 100, 1000, 10000),
-                       inline = TRUE)),
-          plotOutput("activity3a", height = "250px"),
+          splitLayout(
+            sliderInput("eta1", label = HTML("log(&eta;)"),
+                       min = -3, max = 0, value = -3,
+                       step = 0.25, width = "150px"),
+            sliderInput("epochs1", label = "log(epochs)",
+                       min = 1, max = 4, value = 1, 
+                       step = 0.5, width = "150px"),
+            radioButtons("ts",label = "unique training samples",
+                       choices = c(1,4), selected = 1,
+                       inline = FALSE),
+            radioButtons("avg", label = "average error?",
+                       choices = c("yes","no"), selected = "no",
+                       inline = FALSE)
+          ),
+          plotOutput("activity3a", height = "300px"),
           br(), br(),
             radioButtons("test1", label = "test sample",
-                         choices = c("0.6/0.4/0.2", 
-                                     "1.0/0.4/0.0",
-                                     "0.6/0.2/0.0",
-                                     "0.2/0.2/0.2",
-                                     "0.6/0.6/0.4"),
+                         choices = c("1/0/1", 
+                                     "1/1/0",
+                                     "0/0/0",
+                                     "0/1/1"),
                          inline = TRUE),
             verbatimTextOutput("prediction", placeholder = TRUE),
             verbatimTextOutput("error", placeholder = TRUE)
@@ -111,7 +120,9 @@ ui = navbarPage("AC 3.0: Neural Networks",
           ))),
       column(width = 6,
         align = "center",
-        img(src = "wrap-up-plot.png", height = "500px")
+        img(src = "error-vs-steps-1.png", height = "200px"),
+        img(src = "error-vs-steps-2.png", height = "200px"),
+        img(src = "sigmoidal.png", height = "200px")
     )))
 
 

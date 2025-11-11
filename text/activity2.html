@@ -1,37 +1,28 @@
 
 
 
-<p>A training sample provides a set of inputs and the corresponding
-expected, or target, result. The difference between the target, <span class="math inline">\(t\)</span>, and the output of the feed forward
+<p>A training sample provides a set of inputs and their corresponding
+expected, or target result. The difference between the target, <span class="math inline">\(t\)</span>, and the output of the feed forward
 process, <span class="math inline">\(O_1\)</span>, is an error, <span class="math inline">\(E\)</span>. The goal of backpropogation is to use
 that error to adjust all of the neural network’s weights in a way that
 minimizes the difference between <span class="math inline">\(t\)</span>
 and <span class="math inline">\(O_1\)</span>.</p>
-<p><strong>Exercise 1</strong>. There are several ways to report error,
-but the one used here is <span class="math inline">\(E = \frac{1}{2}(t -
-O_1)^2\)</span>. Given inputs of <span class="math inline">\(I_1 =
-0.600\)</span> and <span class="math inline">\(I_2 = 0.400\)</span>, a
-target of <span class="math inline">\(t = 0.200\)</span>, and the
-results accessible using the after feed-forward radio button, what is
-the value of <span class="math inline">\(E\)</span>.</p>
+<p><strong>Exercise 1</strong>. There are several ways to report error
+after feeding-forward: the error function, <span class="math inline">\(E\)</span>, used here is <span class="math inline">\(E = \frac{1}{2}(t - O_1)^2\)</span>. Using the
+first row of the XOR logic gate’s truth table—inputs of <span class="math inline">\(I_1 = 1.00\)</span> and <span class="math inline">\(I_2 = 0.00\)</span>, and a target of <span class="math inline">\(t = 1.00\)</span>—and the results accessible using
+the after feed-forward radio button, calculate the value of <span class="math inline">\(E\)</span>.</p>
 <p><strong>Exercise 2</strong>. In backpropogation, the error at the
 output layer is spread across the weights between the layers of nodes.
 Beginning with the output, the algorithm adjusts the weights between the
 output layer and the hidden layer, and then adjusts the weights between
-the hidden layer and the input layer. The result is the network on the
-right accessible using the after backpropogation radio button. Which set
-of weights—those between the output layer and the hidden layer or those
-between the hidden layer and the input layer—show the greatest change in
-value? Explain why this makes sense. In which direction—more
-negative/less positive or more positive/less negative—are the changes in
-the value of these weights? Explain why this makes sense.</p>
-<p><strong>Exercise 3</strong>. Use the radio button to examine the
-after backpropogation neural network. The inputs,<span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, the values of the hidden layer,
-<span class="math inline">\(H_1\)</span>, <span class="math inline">\(H_2\)</span>, and <span class="math inline">\(H_3\)</span>, and the output, <span class="math inline">\(O_1\)</span> are missing because each is reset
-before taking a new training sample through the feed-forward process.
-Suppose you run the same training sample through the feed-forward
-network a second time, using <span class="math inline">\(I_1 =
-0.600\)</span>, <span class="math inline">\(I_2 = 0.400\)</span>, and
-<span class="math inline">\(t = 0.200\)</span>. Using the weights from
-the after backpropogation network, determine the value for <span class="math inline">\(O_1\)</span> and the resulting error. Do your
-results make sense?</p>
+the hidden layer and the input layer. The result is the network
+accessible using the after backpropagation radio button. In which
+direction are the weights changing? Are they more negative/less
+positive, more positive/less negative, or is there no discernible trend?
+Explain why your results makes sense.</p>
+<p><strong>Exercise 3</strong>. After backpropagation, a new training
+sample is used to further train the network. Suppose the next training
+sample has inputs of <span class="math inline">\(I_1 = 0\)</span> and
+<span class="math inline">\(I_2 = 1\)</span> and a target of <span class="math inline">\(t = 1\)</span>, and that the bias values, <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span>, remain fixed at <span class="math inline">\(1.00\)</span>. Using the weights accessible from
+the after backpropagation radio button, determine the value for <span class="math inline">\(O_1\)</span> and the resulting error. Comment on
+your results.</p>

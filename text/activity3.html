@@ -1,33 +1,37 @@
 
 
 
-<p>A neural network is a tool for making predictions about new samples
-given information about existing samples. The neural network learns how
-to make predictions by presenting it with a set of training samples that
-have known inputs and outputs, feed-forwarding this information through
-the neural network, and then using backpropogation to adjust the weights
-between nodes until the neural network successfully learns how to turn a
-set of known inputs into predicted outputs. This is what it means to
-train a neural network.</p>
-<p><strong>Exercise 1</strong>. There are two important training
-variables: the size of weight adjustments (called the learning rate and
-defined as <span class="math inline">\(\eta\)</span>), and the number of
-times (epochs) each training sample is passed through the neural
-network. The figure on the upper right allows you to explore how <span class="math inline">\(\eta\)</span> and epochs affects training using
-the neural network from the last two tabs and using a single training
-sample with inputs of <span class="math inline">\(I_1 = 0.600\)</span>
-and <span class="math inline">\(I_2 = 0.400\)</span>, and a known output
-of <span class="math inline">\(t = 0.200\)</span>. Defining error, <span class="math inline">\(E\)</span>, as <span class="math inline">\(E =
-\frac{1}{2}(t - O_1)^2\)</span>, what is the effect of changing <span class="math inline">\(\eta\)</span> and/or epochs? What are good choices
-for <span class="math inline">\(\eta\)</span> and epochs if you want to
-minimize the error in as few epochs as possible? <em>Note: One would not
-actually train a neural network using a single training sample; doing so
-here, however, is a useful way to isolate the effect of <span class="math inline">\(\eta\)</span> and epochs on training</em>.</p>
-<p><strong>Exercise 2</strong>. Once a network is trained, we can
-evaluate its predictive ability by presenting it with test samples that
-have known inputs and outputs and recording the error. The radio buttons
-on the bottom right provide five test samples in the form of <span class="math inline">\(I_1\)</span>/<span class="math inline">\(I_2\)</span>/ <span class="math inline">\(t\)</span>. Set the training variables <span class="math inline">\(\eta\)</span> and epochs to your optimum values
-for Exercise 1. What do you notice about the predicted output and the
-error for each of the five test samples? Why do you think your see this
-behavior? Sometimes a network is described as overtrained; what do you
-think this means?</p>
+<div id="training" class="section level4">
+<h4>Training</h4>
+<p>There are three important training variables: the number of training
+samples, <span class="math inline">\(n\)</span>, the size of weight
+adjustments (the learning rate, <span class="math inline">\(\eta\)</span>), and how many times the set of
+training samples passes through the neural network (epochs). The
+controls on the right allow you to explore how each variable affects
+training: the sliders for <span class="math inline">\(\eta\)</span> and
+epochs use a log scale; when <span class="math inline">\(n = 1\)</span>
+the first row of the XOR logic gate’s truth table is the training
+sample, and when <span class="math inline">\(n = 4\)</span> all four
+rows of the truth table are training samples. The accompanying figure
+shows how the error changes with each step through the network. When
+using four training samples you can overlay the average error for each
+epoch.</p>
+<p><strong>Exercise 1</strong>. Set <span class="math inline">\(\eta\)</span> to <span class="math inline">\(0.001\)</span>, epochs to <span class="math inline">\(10\)</span>, and one training sample. Step through
+epochs from <span class="math inline">\(10\)</span> to <span class="math inline">\(10,000\)</span> and describe how the error changes
+during training.</p>
+<p><strong>Exercise 2</strong>. Set <span class="math inline">\(\eta\)</span> to <span class="math inline">\(0.001\)</span>, epochs to <span class="math inline">\(100\)</span>, and one training sample. Step
+through <span class="math inline">\(\eta\)</span> from <span class="math inline">\(0.001\)</span> to <span class="math inline">\(1\)</span> and describe how the error changes
+during training.</p>
+<p><strong>Exercise 3</strong>. Set <span class="math inline">\(\eta\)</span> to <span class="math inline">\(0.1\)</span> and epochs to <span class="math inline">\(10,000\)</span>. Change <span class="math inline">\(n\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(4\)</span> and escribe how the error changes
+during training.</p>
+</div>
+<div id="testing" class="section level4">
+<h4>Testing</h4>
+<p>After training a network, we evaluate its predictive ability by
+presenting it with test samples that have known inputs and outputs and
+record the error. The radio button on the bottom right use the rows in
+the XOR logic gate’s truth table as test samples in the form <span class="math inline">\(I_1 / I_2 / t\)</span>.</p>
+<p><strong>Exercise 4</strong>. Return to Exercises 1–3 and examine the
+predictions and errors for each training sample. What do you notice
+about your results?</p>
+</div>

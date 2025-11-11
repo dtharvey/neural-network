@@ -3,36 +3,36 @@
 
 <div id="what-is-a-neural-network" class="section level4">
 <h4>What is a Neural Network?</h4>
-<p><span class="math inline">\(\require{mhchem}\)</span>A neural network
-uses a supervised machine learning algorithm to discover an underlying
-structure in a set of data. The figure on the upper right is a simple
-neural network that accepts two inputs and returns a single output. A
-hidden layer with three nodes connects the input nodes to the output
-node. Weights connect each node in the hidden layer to all nodes in the
-input and output layers. A neural network is trained by presenting it
-with samples that have known inputs and outputs—that these are known is
-why this is a supervised method—and adjusting the weights until the
-difference between the known and predicted outputs is sufficiently
-small. Once trained, the network is used to predict the outcome of new
-experiments.</p>
+<p><span class="math inline">\(\require{mhchem}\)</span>The figure on
+the upper right is a schematic of a small neural network that accepts
+two inputs, perhaps pH and temperature, and returns a single output,
+perhaps %yield. In between the inputs and the output are two bias terms
+and a hidden layer with two nodes. Weights—shown as arrows—connect nodes
+in the hidden layer to the nodes in the input and output layers
+(including the bias terms). A neural network is trained by presenting it
+with samples that have known inputs and outputs and adjusting the
+weights until the difference between the known and predicted outputs is
+sufficiently small. Once trained, the network is used to predict the
+outcome of new samples that it hasn’t yet seen.</p>
 </div>
-<div id="what-does-it-mean-to-feed-forward-and-to-backpropogate" class="section level4">
-<h4>What Does it Mean to Feed-Forward and to Backpropogate?</h4>
-<p>As suggested in the figure, training a a neural network occurs in two
-ways: first by feeding-forward and then by backpropogating. Feed-forward
-means information flows from inputs to outputs. The difference between
-the output and its expected value is an error. To improve the neural
-network’s capabilities, this error is used to adjust the weights,
-working in the reverse direction, a process called backpropogation.</p>
+<div id="what-does-it-mean-to-feedforward-and-to-backpropagate" class="section level4">
+<h4>What Does it Mean to Feed–Forward and to Backpropagate?</h4>
+<p>Training a neural network occurs in two ways: feeding–forward inputs
+and backpropagating errors. Feeding–forward means information flows from
+inputs to outputs. The difference between the output and its expected
+value is an error. To improve the neural network’s capabilities, this
+error is used to adjust all of the network’s weights, working in the
+reverse direction, a process called backpropagation.</p>
 </div>
 <div id="how-do-we-model-a-neuron" class="section level4">
 <h4>How Do We Model a Neuron?</h4>
-<p>A neural network uses a simple model of a neuron in which dendrites
-carry signals to a cell body that processes and passes the signals to an
-axon. The figure on the lower right shows an artificial neuron. In this
-model the neuron’s cell body is a node, the dendrites are the node’s
-inputs, and the axon is the node’s output. The summation symbol, <span class="math inline">\(\Sigma\)</span>, indicates that the inputs and
-their weights are combined mathematically. The S-shaped symbol
-represents an activation function that is applied before the node’s
-value is sent to the next layer.</p>
+<p>A neural network is a simple mathematical model of a physiological
+neuron in which dendrites carry signals to a cell body that processes
+and passes the signals to an axon. The figure on the lower right is a
+schematic of an artificial neuron: the neuron’s cell body is a node, the
+dendrites are the node’s inputs, and the axon is the node’s output. The
+summation symbol, <span class="math inline">\(\Sigma\)</span>, indicates
+that the inputs and their weights are combined mathematically. The
+S-shaped symbol represents an activation function that is applied before
+the node’s value is sent to the next layer.</p>
 </div>

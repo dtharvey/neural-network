@@ -1,35 +1,36 @@
 
 
 
-<p>The template on the right is a neural network with two input nodes,
-<span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, three nodes in a hidden layer, <span class="math inline">\(H_1\)</span>, <span class="math inline">\(H_2\)</span>, and <span class="math inline">\(H_3\)</span>, and a single output node, <span class="math inline">\(O_1\)</span>. Weights connect each node to the
-nodes above it and the nodes below it; thus, <span class="math inline">\(W_{2,1}\)</span> is the weight between <span class="math inline">\(I_2\)</span> and <span class="math inline">\(H_1\)</span>, and <span class="math inline">\(V_2\)</span> is the weight between <span class="math inline">\(H_2\)</span> and <span class="math inline">\(O_1\)</span>. Select the radio button labeled
-initial set-up to show one possible initial state for the network. The
-inputs of <span class="math inline">\(0.600\)</span> and <span class="math inline">\(0.400\)</span> are from a training sample that has
-an expected output—or target—of <span class="math inline">\(0.200\)</span>. The weights are drawn from a
-random uniform distribution with limits of <span class="math inline">\(\frac{\pm 1}{\sqrt{n}}\)</span>, where <span class="math inline">\(n\)</span> is the number of nodes that feed into a
-weight.</p>
-<p><strong>Exercise 1</strong>. Verify that the initial weights are
-consistent with the description above.</p>
-<p><strong>Exercise 2</strong>. In a feed-forward neural network, a
-node’s initial value is a weighted sum of the inputs and weights that
-feed into it; thus <span class="math inline">\(H_1 = I_1 \times W_{1,1}
-+ I_2 \times W_{21} = 0.377\)</span>. Why is a weighted sum a reasonable
+<p>The table on the upper right is the truth table for the XOR
+(exclusive or) logic gate, which takes two inputs and produces a single
+output. Values of 1 are read as true and values of <span class="math inline">\(0\)</span> are read as false. The template below
+the table is a neural network used to model the behavior of the XOR
+logic gate; it has two inputs, two nodes in a hidden layer, two bias
+terms, and a single output. Weights connect nodes and bias terms to each
+other; thus, <span class="math inline">\(W_{2,1}\)</span> is the weight
+between <span class="math inline">\(I_2\)</span> and <span class="math inline">\(H_1\)</span>, <span class="math inline">\(V_{2,1}\)</span> is the weight between <span class="math inline">\(H_2\)</span> and <span class="math inline">\(O_1\)</span>, and <span class="math inline">\(U_{1,2}\)</span> is the weight between <span class="math inline">\(B_1\)</span> and <span class="math inline">\(H_2\)</span>.</p>
+<p><strong>Exercise 1</strong>. The XOR logic gate seems simple but is
+difficult to model. Plot the four pairs of inputs placing Input 1 on the
+x-axis and Input 2 on the y-axis, and use a circle for an output of 1
+and a square for an output of 0. Using your plot, show that you cannot
+separate the two outputs from each other using a single straight
+line.</p>
+<p><strong>Exercise 2</strong>. Use the radio button to display one
+possible initial state for the network. Weights are drawn from a random
+uniform distribution with limits of <span class="math inline">\(\frac{\pm 1}{\sqrt{n}}\)</span>, where <span class="math inline">\(n\)</span> is the number of weights that
+contribute to a node’s value. Each node’s initial value is a weighted
+sum of the inputs and weights that feed into it; thus <span class="math inline">\(H_1 = I_1 \times W_{1,1} + I_2 \times W_{21} + B_1
+\times U_{1,1} = 0.183\)</span>. Why is a weighted sum a reasonable
 estimate for a node’s initial value? Calculate the initial value for
-<span class="math inline">\(H_2\)</span> and for <span class="math inline">\(H_3\)</span>.</p>
-<p><strong>Exercise 3</strong>. An activation function limits nodes in
-the hidden layer and the output layer to a narrow range of possible
-values. A sigmoidal function, <span class="math inline">\(f(x) =
-\frac{1}{1 + e^{-x}}\)</span>, is a common choice where <span class="math inline">\(x\)</span> is a node’s weighted sum. Explain why
-this function is limited to values between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
-<p><strong>Exercise 4</strong>. Applying a sigmoidal activation function
-to the weighted sum for <span class="math inline">\(H_1\)</span> changes
-its value from <span class="math inline">\(0.377\)</span> to <span class="math inline">\(0.593\)</span>. Verify this result and then
-calculate the effect of a sigmoidal activation function on <span class="math inline">\(H_2\)</span> and <span class="math inline">\(H_3\)</span>. <em>Note: The boxes for the hidden
-layer and the output layer include both the weighted sum (top) and its
-value after applying the transfer function (bottom)</em>.</p>
+<span class="math inline">\(H_2\)</span>.</p>
+<p><strong>Exercise 3</strong>. An activation function limits nodes to a
+narrow range of possible values. A sigmoidal function, <span class="math inline">\(f(x) = 1 / (1 + e^{-x})\)</span>, is a common
+choice where <span class="math inline">\(x\)</span> is a node’s weighted
+sum. Explain why this function limits nodes to values between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Applying a sigmoidal activation
+function to the weighted sum for <span class="math inline">\(H_1\)</span> changes its value from <span class="math inline">\(0.183\)</span> to <span class="math inline">\(0.546\)</span>. Calculate the effect of a
+sigmoidal activation function on <span class="math inline">\(H_2\)</span>.</p>
 <p><strong>Exercise 5</strong>. The feed-forward process for the output
-layer follows the same rules: calculate the weighted sum for the output
-node and then apply a sigmoidal activation function. Calculate the
-output node’s value and check your work by selecting the radio button
-labeled after feed-forward.</p>
+layer follows the same rules: first calculate the weighted sum for the
+output node and then apply a sigmoidal activation function. Calculate
+the output node’s value and check your work by selecting the radio
+button labeled after feed-forward.</p>

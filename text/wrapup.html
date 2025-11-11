@@ -1,74 +1,95 @@
 
 
 
-<div id="how-to-design-a-neural-network" class="section level4">
-<h4>How to Design a Neural Network</h4>
+<div id="overtraining-and-undertraining" class="section level4">
+<h4>Overtraining and Undertraining</h4>
+<p>The figure on the upper right shows the progress of training our XOR
+neural network using one training sample (the first row of the XOR logic
+gate’s truth table), <span class="math inline">\(\eta = 0.1\)</span>,
+and <span class="math inline">\(4,000\)</span> epochs. The error shows a
+rapid decline in value, eventually leveling off with an error close to
+<span class="math inline">\(0\)</span>, and with a predicted result of
+<span class="math inline">\(0.9838\)</span> for the test sample: <span class="math inline">\(I_1 = 1 / I_2 = 0 / t = 1\)</span>, which we round
+to <span class="math inline">\(1\)</span>. A closer look at the
+predicted values for the remaining test samples, however, shows that the
+second and third return predictions of <span class="math inline">\(1\)</span> instead of <span class="math inline">\(0\)</span>. This is an example of overtraining in
+which the network “learns” that all outputs return a value of 1. Network
+designs that include more layers and nodes than needed, that lack
+diversity in the features of the training samples, and that train for
+too long may lead to overtraining.</p>
+<p>The figure in the middle shows the progress of training our XOR
+neural network using four training samples, <span class="math inline">\(\eta = 0.1\)</span>, and <span class="math inline">\(10,000\)</span> epochs. The blue trace shows the
+error after each individual training sample is processed and the red
+trace smooths the errors by reporting the average error for each epoch.
+During the first <span class="math inline">\(10,000\)</span> epochs the
+red trace shows little change in the average error. Many neural network
+algorithms include threshold criteria that end the training if there
+isn’t sufficient timely progress. Around <span class="math inline">\(15,000\)</span> epochs the error begins to change
+quickly, eventually reaching a plateau with an error close to <span class="math inline">\(0\)</span>. The final trained network is able to
+predict correctly each test sample’s expected output of <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>. Network designs that are too simple,
+that overlook important features of the inputs, and for which training
+is too short can lead to undertraining.</p>
+</div>
+<div id="how-to-design-and-train-a-neural-network" class="section level4">
+<h4>How to Design and Train a Neural Network</h4>
 <p>There are many variables to consider when designing a neural network.
-Some variables are fixed by the system, such as the number of
-measurements and the number of outputs. For example, the
+Some variables are fixed by the system, such as the two inputs and one
+output for the XOR logic gate’s truth table. In other cases the user
+must decide on what inputs and outputs are relevant; for example, the
 <code>iris</code> data set—a data set used in many machine learning
-studies—provides data on 50 samples each of three species of iris:
-<em>setosa</em>, <em>versicolor</em>, and <em>virginica</em>. For each
-plant, the data includes the sepal’s length and width, and the petal’s
-length and width, all reported in cm. The input layer, therefore, has
-four nodes, one per measurement, and the output layer has three nodes,
-one for each species. The number of hidden layers and the number of
-nodes in each, the learning rate, and the number of epochs is determined
-by trial-and-error. The figure on the right shows a neural network for
-the <code>iris</code> data with inputs on the left and outputs on the
-right. This network includes two hidden layers, the first with four
-nodes and the second with two nodes.</p>
+studies—provides information on 50 samples each of three species of
+iris: <em>setosa</em>, <em>versicolor</em>, and <em>virginica</em>. For
+each plant, the data includes the sepal’s length and width, and the
+petal’s length and width, all reported in cm. The input layer,
+therefore, has four nodes, one per measurement, and the output layer has
+three nodes, one for each species. The number of hidden layers and the
+number of nodes in each, the learning rate, <span class="math inline">\(\eta\)</span>, and the number of epochs is
+determined by trial-and-error.</p>
 </div>
-<div id="what-is-the-source-of-the-extra-nodes" class="section level4">
-<h4>What is the Source of the Extra Nodes?</h4>
-<p>There are three additional nodes at the top of the neural network,
-each in blue and each labeled with the number 1. These nodes help to
-account for bias in the data in which all measurements are offset by a
-fixed amount due, for example, to a failure to properly calibrate the
-measurements. Although the weights to these nodes are adjusted during
-training, the value of these nodes are fixed at 1.</p>
+<div id="what-are-bias-nodes" class="section level4">
+<h4>What are Bias Nodes?</h4>
+<p>A bias term adds flexibility to the training of a network by
+providing an offset. When fitting a straight-line to data using the
+equation <span class="math inline">\(y = \beta_1 x\)</span>, for example
+we force the line to pass through the point where <span class="math inline">\(y = x = 0\)</span>. Adding an intercept term to
+the equation gives us <span class="math inline">\(y = \beta_0 + \beta_1
+x\)</span>. The <span class="math inline">\(y\)</span>-intercept term,
+<span class="math inline">\(\beta_0\)</span>, allows the regression
+model to arrive at a better fit of the regression line to the data by
+allowing the line to move back-and-forth along the <span class="math inline">\(x\)</span>-axis. The bias nodes in the XOR logic
+gate’s neural network serves the same purpose.</p>
 </div>
-<div id="training-and-testing-the-network" class="section level4">
-<h4>Training and Testing the Network</h4>
-<p>The <code>iris</code> data set has data for 150 individual plants.
-The data set was divided into 120 training samples—selected at
-random—with the remaining 30 samples held in reserve for testing the
-trained network. The figure on the right shows the neural network after
-21,239 cycles of feeding-forward and backpropogating samples from the
-training set. The numerical values above each arrow show the weight
-between two nodes.</p>
-<p>After training the network, the 30 test samples were passed through
-the network with each test sample identified by the trained network as
-<em>versicolor</em>, <em>setosa</em>, or <em>virginica</em>. All 30 test
-samples were correctly identified.</p>
-</div>
-<div id="overtraining" class="section level4">
-<h4>Overtraining</h4>
-<p>To be effective, a neural network must be sufficiently flexible that
-it can make correct predictions for a wide variety of samples. When a
-neural network is overtrained it makes poor predictions because it
-cannot see differences between samples. If your training set has only
-one sample that is used over and over, then the trained neural network
-will return essentially the same output for all samples. See, for
-example, your work on the Training and Testing tab where all five test
-samples have predicted outputs of approximately <span class="math inline">\(0.2\)</span> even when their target value was
-<span class="math inline">\(0.0\)</span> or <span class="math inline">\(0.4\)</span>.</p>
+<div id="what-is-an-activation-function" class="section level4">
+<h4>What is an Activation Function?</h4>
+<p>The activation function allows a neural network to model non-linear
+relationships between inputs and outputs. The value of a node is a
+weighted sum of its inputs; in the XOR logic gate’s neural network, for
+example, the value of the hidden node <span class="math inline">\(H_1\)</span> is given by the equation</p>
+<p><span class="math display">\[H_1 = I_1 \times W_{1,1} + I_2 \times
+W_{21} + B_1 \times U_{1,1}\]</span></p>
+<p>which is a linear equation. Applying a sigmoidal activation function
+to <span class="math inline">\(H_1\)</span></p>
+<p><span class="math display">\[f(x) = 1 / (1 + e^{-x})\]</span></p>
+<p>where <span class="math inline">\(x\)</span> is the value of <span class="math inline">\(H_1\)</span>, takes an input for <span class="math inline">\(x\)</span> that may range from <span class="math inline">\(-\inf\)</span> to <span class="math inline">\(+\inf\)</span> and squashes its output so that its
+value is between <span class="math inline">\(0\)</span> and 1, as seen
+in the figure on the lower right.</p>
 </div>
 <div id="r-package-for-neural-networks" class="section level4">
 <h4>R Package for Neural Networks</h4>
-<p>The analysis of the <code>iris</code> data set was completed using
-the R package <code>neuralnet</code>, which is available from <a href="https://cran.r-project.org/package=neuralnet">CRAN</a>. Additional
-guidance was obtained from a <a href="https://www.datacamp.com/tutorial/neural-network-models-r">datacamp
-tutorial</a>.</p>
+<p>There are two <span class="math inline">\(R\)</span> packages
+available for working with relatively simple neural networks; these are
+<code>neuralnet</code>, available from <a href="https://cran.r-project.org/package=neuralnet">CRAN</a>, and
+<code>nnet</code>, also available from <a href="https://CRAN.R-project.org/package=nnet">CRAN</a>. Additional
+plotting tools are available from <a href="https://CRAN.R-project.org/package=NeuralNetTools">CRAN</a> in the
+<code>NeuralNetTools</code> package.</p>
 </div>
 <div id="additional-reources" class="section level4">
 <h4>Additional Reources</h4>
 <p>The treatment of neural networks in this learning module is
 intentionally limited, emphasizing a more general than technical
-description of how the feed-forward/backpropogation algorithm works. The
+description of how the feed-forward/backpropagation algorithm works. The
 resources gathered here provide a broader range of treatments.</p>
-<p>An on-line neural network calculator is available from <a href="https://pages.nist.gov/nn-calculator/">NIST</a> on-line neural
-network calculator.</p>
+<p>An on-line neural network calculator is available from <a href="https://pages.nist.gov/nn-calculator/">NIST</a>.</p>
 <p>A useful on-line introduction to neural networks is <a href="https://python-course.eu/machine-learning/neural-networks-introduction.php">Bernd
 Klein, Neural Network Introduction: Chapters 10-17</a>. It provides an
 excellent review of the computational details of the
@@ -79,4 +100,6 @@ An Introduction</strong>, VCH, Weinheim, 1993.</p>
 Lewi, J. Smeyers-Verbeke, <strong>Handbook of Chemometrics and
 Qualimetrics: Part B</strong>, Chapter 44, Elsevier, Amsterdam,
 1998.</p>
+<p>A history of applying neural networks to the XOR truth table is <a href="https://seantrott.substack.com/p/perceptrons-xor-and-the-first-ai">this
+post</a> by Sean Trott.</p>
 </div>

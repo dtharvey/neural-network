@@ -2,36 +2,49 @@
 title: "wrapup"
 output: html_fragment
 ---
-#### How to Design a Neural Network
+#### Overtraining and Undertraining
 
-There are many variables to consider when designing a neural network. Some variables are fixed by the system, such as the number of measurements and the number of outputs. For example, the `iris` data set---a data set used in many machine learning studies---provides data on 50 samples each of three species of iris: *setosa*, *versicolor*, and *virginica*. For each plant, the data includes the sepal's length and width, and the petal's length and width, all reported in cm. The input layer, therefore, has four nodes, one per measurement, and the output layer has three nodes, one for each species. The number of hidden layers and the number of nodes in each, the learning rate, and the number of epochs is determined by trial-and-error. The figure on the right shows a neural network for the `iris` data with inputs on the left and outputs on the right. This network includes two hidden layers, the first with four nodes and the second with two nodes.
+The figure on the upper right shows the progress of training our XOR neural network using one training sample (the first row of the XOR logic gate's truth table), $\eta = 0.1$, and $4,000$ epochs. The error shows a rapid decline in value, eventually leveling off with an error close to $0$, and with a predicted result of $0.9838$ for the test sample: $I_1 = 1 / I_2 = 0 / t = 1$, which we round to $1$. A closer look at the predicted values for the remaining test samples, however, shows that the second and third return predictions of $1$ instead of $0$. This is an example of overtraining in which the network "learns" that all outputs return a value of 1. Network designs that include more layers and nodes than needed, that lack diversity in the features of the training samples, and that train for too long may lead to overtraining.
 
-#### What is the Source of the Extra Nodes?
+The figure in the middle shows the progress of training our XOR neural network using four training samples, $\eta = 0.1$, and $10,000$ epochs. The blue trace shows the error after each individual training sample is processed and the red trace smooths the errors by reporting the average error for each epoch. During the first $10,000$ epochs the red trace shows little change in the average error. Many neural network algorithms include threshold criteria that end the training if there isn't sufficient timely progress. Around $15,000$ epochs the error begins to change quickly, eventually reaching a plateau with an error close to $0$. The final trained network is able to predict correctly each test sample's expected output of $0$ or $1$. Network designs that are too simple, that overlook important features of the inputs, and for which training is too short can lead to undertraining.
 
-There are three additional nodes at the top of the neural network, each in blue and each labeled with the number 1. These nodes help to account for bias in the data in which all measurements are offset by a fixed amount due, for example, to a failure to properly calibrate the measurements. Although the weights to these nodes are adjusted during training, the value of these nodes are fixed at 1.
+#### How to Design and Train a Neural Network
 
-#### Training and Testing the Network
+There are many variables to consider when designing a neural network. Some variables are fixed by the system, such as the two inputs and one output for the XOR logic gate's truth table. In other cases the user must decide on what inputs and outputs are relevant; for example, the `iris` data set---a data set used in many machine learning studies---provides information on 50 samples each of three species of iris: *setosa*, *versicolor*, and *virginica*. For each plant, the data includes the sepal's length and width, and the petal's length and width, all reported in cm. The input layer, therefore, has four nodes, one per measurement, and the output layer has three nodes, one for each species. The number of hidden layers and the number of nodes in each, the learning rate, $\eta$, and the number of epochs is determined by trial-and-error.
 
-The `iris` data set has data for 150 individual plants. The data set was divided into 120 training samples---selected at random---with the remaining 30 samples held in reserve for testing the trained network. The figure on the right shows the neural network after 21,239 cycles of feeding-forward and backpropogating samples from the training set. The numerical values above each arrow show the weight between two nodes. 
+#### What are Bias Nodes?
 
-After training the network, the 30 test samples were passed through the network with each test sample identified by the trained network as *versicolor*, *setosa*, or *virginica*. All 30 test samples were correctly identified.
+A bias term adds flexibility to the training of a network by providing an offset. When fitting a straight-line to data using the equation $y = \beta_1 x$, for example we force the line to pass through the point where $y = x = 0$. Adding an intercept term to the equation gives us $y = \beta_0 + \beta_1 x$. The $y$-intercept term, $\beta_0$, allows the regression model to arrive at a better fit of the regression line to the data by allowing the line to move back-and-forth along the $x$-axis. The bias nodes in the XOR logic gate's neural network serves the same purpose.
 
-#### Overtraining
+#### What is an Activation Function?
 
-To be effective, a neural network must be sufficiently flexible that it can make correct predictions for a wide variety of samples. When a neural network is overtrained it makes poor predictions because it cannot see differences between samples. If your training set has only one sample that is used over and over, then the trained neural network will return essentially the same output for all samples. See, for example, your work on the Training and Testing tab where all five test samples have predicted outputs of approximately $0.2$ even when their target value was $0.0$ or $0.4$.
+The activation function allows a neural network to model non-linear relationships between inputs and outputs. The value of a node is a weighted sum of its inputs; in the XOR logic gate's neural network, for example, the value of the hidden node $H_1$ is given by the equation
+
+$$H_1 = I_1 \times W_{1,1} + I_2 \times W_{21} + B_1 \times U_{1,1}$$
+
+which is a linear equation. Applying a sigmoidal activation function to $H_1$
+
+$$f(x) = 1 / (1 + e^{-x})$$
+
+where $x$ is the value of $H_1$, takes an input for $x$ that may range from $-\inf$ to $+\inf$ and squashes its output so that its value is between $0$ and 1, as seen in the figure on the lower right. 
 
 #### R Package for Neural Networks
 
-The analysis of the `iris` data set was completed using the R package `neuralnet`, which is available from [CRAN](https://cran.r-project.org/package=neuralnet). Additional guidance was obtained from a [datacamp tutorial](https://www.datacamp.com/tutorial/neural-network-models-r).
+There are two $R$ packages available for working with relatively simple neural networks; these are `neuralnet`, available from [CRAN](https://cran.r-project.org/package=neuralnet), and `nnet`, also available from [CRAN](https://CRAN.R-project.org/package=nnet). Additional plotting tools are available from [CRAN]( https://CRAN.R-project.org/package=NeuralNetTools) in the `NeuralNetTools` package.
 
 #### Additional Reources
 
-The treatment of neural networks in this learning module is intentionally limited, emphasizing a more general than technical description of how the feed-forward/backpropogation algorithm works. The resources gathered here provide a broader range of treatments. 
+The treatment of neural networks in this learning module is intentionally limited, emphasizing a more general than technical description of how the feed-forward/backpropagation algorithm works. The resources gathered here provide a broader range of treatments. 
 
-An on-line neural network calculator is available from [NIST](https://pages.nist.gov/nn-calculator/) on-line neural network calculator.
+An on-line neural network calculator is available from [NIST](https://pages.nist.gov/nn-calculator/).
 
 A useful on-line introduction to neural networks is [Bernd Klein, Neural Network Introduction: Chapters 10-17](https://python-course.eu/machine-learning/neural-networks-introduction.php). It provides an excellent review of the computational details of the feed-forward/backpropogation algorithm.
 
 Jure Zupan, Johann Gasteiger, **Neural Networks for Chemists; An Introduction**, VCH, Weinheim, 1993. 
 
 B.G.M. Vandeginste, D.L.Massart, L.M.C. Buydens, S. DeJong, P.J. Lewi, J. Smeyers-Verbeke, **Handbook of Chemometrics and Qualimetrics: Part B**, Chapter 44, Elsevier, Amsterdam, 1998.
+
+A history of applying neural networks to the XOR truth table is [this post](https://seantrott.substack.com/p/perceptrons-xor-and-the-first-ai) by Sean Trott.
+
+
+

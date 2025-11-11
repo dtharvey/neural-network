@@ -1,0 +1,40 @@
+Key Modifications to Each Step
+FORWARD PASS
+Step 1 - Hidden layer weighted sums now include bias:
+net_h₁ = w₁₁·x₁ + w₂₁·x₂ + b₁·(1.0)
+net_h₂ = w₁₂·x₁ + w₂₂·x₂ + b₂·(1.0)
+net_h₃ = w₁₃·x₁ + w₂₃·x₂ + b₃·(1.0)
+```
+
+**Step 3** - Output weighted sum now includes bias:
+```
+net_o = v₁·h₁ + v₂·h₂ + v₃·h₃ + b_o·(1.0)
+```
+
+### BACKWARD PASS
+
+**Step 7** - Now also compute gradient for bias-to-output weight:
+```
+∂E/∂b_o = δ_o · (1.0) = δ_o
+```
+
+**Step 9** - Now also compute gradients for bias-to-hidden weights:
+```
+∂E/∂b₁ = δ_h₁ · (1.0) = δ_h₁
+∂E/∂b₂ = δ_h₂ · (1.0) = δ_h₂
+∂E/∂b₃ = δ_h₃ · (1.0) = δ_h₃
+```
+
+### WEIGHT UPDATES
+
+**Step 10** - Also update bias-to-output weight:
+```
+b_o(new) = b_o(old) - η · ∂E/∂b_o
+         = b_o(old) - η · δ_o
+```
+
+**Step 11** - Also update bias-to-hidden weights:
+```
+b₁(new) = b₁(old) - η · δ_h₁
+b₂(new) = b₂(old) - η · δ_h₂
+b₃(new) = b₃(old) - η · δ_h₃

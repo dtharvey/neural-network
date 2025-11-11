@@ -1,6 +1,0 @@
----
-title: "activity4"
-output: html_fragment
----
-
-text placeholder
